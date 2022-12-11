@@ -1,0 +1,16 @@
+
+  {
+    "name": "wordbattle",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "npm run setup:server",
+      "setup:app": "npm run setup:server && npm run setup:client",
+      "setup:client": "cd wordBattle.client && npm i",
+      "setup:server": "cd wordBattle && npm i",
+      "start": "node wordBattle/index.js"
+    },
+    "engines": {
+      "node": "^18.12.1"
+    }
+  }
+  

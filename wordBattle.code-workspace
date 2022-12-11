@@ -1,0 +1,67 @@
+
+{
+  "folders": [
+    {
+      "path": "wordBattle.client",
+      "name": "client"
+    },
+    {
+      "path": "wordBattle",
+      "name": "server"
+    }
+  ],
+  "settings": {
+    "editor.suggestSelection": "first",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "javascript.referencesCodeLens.enabled": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.showOnAllFunctions": true,
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "files.exclude": {
+      "**/.nyc_*": true,
+      "**/coverage": true,
+      "**/node_modules": true
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDragAndDrop": false,
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.codeActionsOnSave.mode": "all",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "files.associations": {
+      "*.vue": "vue"
+    },
+    "[vue]": {
+      "editor.defaultFormatter": "Vue.volar"
+    },
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#7ff650",
+      "activityBar.background": "#7ff650",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#6790f7",
+      "activityBarBadge.foreground": "#15202b",
+      "commandCenter.border": "#15202b99",
+      "sash.hoverBorder": "#7ff650",
+      "statusBar.background": "#5bf320",
+      "statusBar.debuggingBackground": "#b820f3",
+      "statusBar.debuggingForeground": "#e7e7e7",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#44d50b",
+      "statusBarItem.remoteBackground": "#5bf320",
+      "statusBarItem.remoteForeground": "#15202b",
+      "titleBar.activeBackground": "#5bf320",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#5bf32099",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#5bf320"
+  }
+}
