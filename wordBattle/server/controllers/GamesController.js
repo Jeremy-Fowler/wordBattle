@@ -9,6 +9,10 @@ export class GamesController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:gameId', this.getGameById)
       .post('', this.createGame)
+      .get('/:gameId/players', this.getPlayersByGameId)
+  }
+  getPlayersByGameId(req, res, next) {
+    throw new Error("Method not implemented.");
   }
   async createGame(req, res, next) {
     try {
