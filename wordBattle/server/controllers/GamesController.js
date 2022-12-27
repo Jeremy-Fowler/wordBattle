@@ -1,5 +1,6 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { gamesService } from "../services/GamesService.js";
+import { messagesService } from "../services/MessagesService.js";
 import BaseController from "../utils/BaseController.js";
 
 export class GamesController extends BaseController {
@@ -8,12 +9,10 @@ export class GamesController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:gameId', this.getGameById)
+      .get('/:gameId/messages', this.getMessagesByGameId)
       .post('', this.createGame)
-      .get('/:gameId/players', this.getPlayersByGameId)
   }
-  getPlayersByGameId(req, res, next) {
-    throw new Error("Method not implemented.");
-  }
+
   async createGame(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
@@ -23,10 +22,17 @@ export class GamesController extends BaseController {
       next(error)
     }
   }
+  async getMessagesByGameId(req, res, next) {
+    try {
+      const messages = await messagesService.getMessagesByGameId(req.params.gameId, req.userInfo.id)
+      return res.send(messages)
+    } catch (error) {
+      next(error)
+    }
+  }
   async getGameById(req, res, next) {
     try {
-      const userId = req.userInfo.id
-      const game = await gamesService.getGameById(req.params.gameId, userId)
+      const game = await gamesService.getGameByIdWithPlayers(req.params.gameId, req.userInfo.id)
       return res.send(game)
     } catch (error) {
       next(error)

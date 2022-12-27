@@ -13653,15 +13653,21 @@ const gameTiles = [
 ]
 
 class GamesService {
+  async getGameByIdWithPlayers(gameId, userId) {
+    const game = await this.getGameById(gameId, userId)
+    delete game.gameTiles
+    await game.populate('players')
+    return game
+  }
+
   async getGameById(gameId, userId) {
-    const game = await dbContext.Games.findById(gameId).populate('players')
+    const game = await dbContext.Games.findById(gameId)
     if (!game) {
       throw new BadRequest('Invalid ID')
     }
     if (!game.playerIds.includes(userId)) {
       throw new Forbidden('You are not a player in this game')
     }
-    game.gameTiles = null
     return game
   }
   async createGame(body) {

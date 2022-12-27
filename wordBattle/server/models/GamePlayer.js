@@ -19,3 +19,5 @@ GamePlayerSchema.virtual('player', {
   justOne: true,
   ref: 'Account'
 })
+
+GamePlayerSchema.index({ playerId: 1, gameId: 1 }, { unique: true })

@@ -7,6 +7,7 @@ export const TileSchema = new Schema(
     playerTile: { type: Boolean, required: true, default: false }
   }
 )
+
 export const PreviousWordSchema = new Schema(
   {
     word: { type: String, minlength: 1, maxlength: 1, required: true },
@@ -35,6 +36,7 @@ PreviousWordSchema.virtual('player', {
   justOne: true,
   ref: 'Account'
 })
+
 GameSchema.virtual('players', {
   localField: 'playerIds',
   foreignField: '_id',
