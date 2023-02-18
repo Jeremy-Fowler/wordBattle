@@ -1,27 +1,30 @@
 import { dbContext } from "../db/DbContext.js";
 import { BadRequest, Forbidden } from "../utils/Errors.js";
 
-class FriendsService {
-  createFriend(body) {
+class FriendshipsService {
+  async acceptFriendshipRequest(friendshipId, userId) {
+    const friendship = await this.getFriendshipById(friendshipId, userId)
+  }
+  createFriendship(body) {
     throw new Error("Method not implemented.");
   }
-  async removeFriend(friendId, userId) {
-    const friend = await this.getFriendById(friendId, userId)
-    await friend.remove()
+  async removeFriendship(friendshipId, userId) {
+    const friendship = await this.getFriendshipById(friendshipId, userId)
+    await friendship.remove()
     return 'Friendship ended'
   }
 
-  async getFriendById(friendId, userId) {
-    const friend = await dbContext.Friends.findById(friendId)
-    if (!friend) {
+  async getFriendshipById(friendshipId, userId) {
+    const friendship = await dbContext.Friendships.findById(friendshipId)
+    if (!friendship) {
       throw new BadRequest('No friend found')
     }
-    if (friend.accountId != userId || friend.userId != userId) {
+    if (friendship.accountId != userId || friendship.userId != userId) {
       throw new Forbidden('Not your friendship')
     }
-    return friend
+    return friendship
   }
 
 }
 
-export const friendsService = new FriendsService()
+export const friendshipsService = new FriendshipsService()
