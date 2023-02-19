@@ -13684,8 +13684,8 @@ class GamesService {
       body.playerIds.push(body.creatorId)
     }
     const game = await dbContext.Games.create(body)
-    gamePlayersService.createGamePlayers(game.id, game.playerIds)
-    game.gameTiles = null
+    await gamePlayersService.createGamePlayers(game.id, game.playerIds)
+    delete game.gameTiles
     return game
   }
 

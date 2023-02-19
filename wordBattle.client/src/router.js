@@ -17,6 +17,18 @@ const routes = [
     component: loadPage('AboutPage')
   },
   {
+    path: '/myGames',
+    name: 'Games',
+    component: loadPage('GamesPage'),
+    beforeEnter: authGuard
+  },
+  {
+    path: '/friends',
+    name: 'Friends',
+    component: loadPage('FriendsPage'),
+    beforeEnter: authGuard
+  },
+  {
     path: '/account',
     name: 'Account',
     component: loadPage('AccountPage'),

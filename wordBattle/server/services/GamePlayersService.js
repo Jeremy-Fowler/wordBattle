@@ -1,9 +1,19 @@
 import { dbContext } from "../db/DbContext.js"
 
 class GamePlayersService {
-  createGamePlayers(gameId, playerIds) {
-    playerIds.forEach(id => {
-      dbContext.GamePlayers.create({ gameId: gameId, playerId: id })
+  async getGamePlayersByAccountId(playerId) {
+    const games = await dbContext.GamePlayers.find({ playerId })
+      .populate({
+        path: 'game',
+        populate: {
+          path: 'players'
+        }
+      })
+    return games
+  }
+  async createGamePlayers(gameId, playerIds) {
+    playerIds.forEach(async (id) => {
+      await dbContext.GamePlayers.create({ gameId: gameId, playerId: id })
     })
   }
 

@@ -15,7 +15,7 @@ FriendshipSchema.virtual('account', {
   ref: 'Account'
 })
 
-FriendshipSchema.virtual('friend', {
+FriendshipSchema.virtual('user', {
   localField: 'userId',
   foreignField: '_id',
   justOne: true,

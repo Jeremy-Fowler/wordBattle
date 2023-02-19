@@ -19,5 +19,11 @@ GamePlayerSchema.virtual('player', {
   justOne: true,
   ref: 'Account'
 })
+GamePlayerSchema.virtual('game', {
+  localField: 'gameId',
+  foreignField: '_id',
+  justOne: true,
+  ref: 'Game'
+})
 
 GamePlayerSchema.index({ playerId: 1, gameId: 1 }, { unique: true })
