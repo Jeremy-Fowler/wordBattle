@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { Forbidden } from '../utils/Errors'
 
 // Private Methods
 
@@ -72,6 +73,17 @@ class AccountService {
       { $set: update },
       { runValidators: true, setDefaultsOnInsert: true, new: true }
     )
+    return account
+  }
+  async editAccount(userId, body) {
+    const account = await dbContext.Account.findOneAndUpdate(userId)
+    if (userId !== account.id.toString()) {
+      throw new Forbidden('You are not authorized')
+    }
+    account.name = body.name || account.name
+    account.picture = body.picture || account.picture
+
+    account.save()
     return account
   }
 }

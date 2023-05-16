@@ -5,22 +5,20 @@
         <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
       </div>
     </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
           <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
+            Game Page
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'HeathersPage' }" class="btn text-success lighten-30 selectable text-uppercase">
+            Heather's Page
           </router-link>
         </li>
       </ul>
@@ -60,5 +58,4 @@ a:hover {
     height: 64px;
   }
 }
-
 </style>
