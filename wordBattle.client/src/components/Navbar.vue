@@ -17,9 +17,7 @@
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'HeathersPage' }" class="btn text-success lighten-30 selectable text-uppercase">
-            Heather's Page
-          </router-link>
+
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
