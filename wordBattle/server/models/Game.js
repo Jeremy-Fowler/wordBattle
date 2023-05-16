@@ -8,7 +8,7 @@ export const TileSchema = new Schema(
   }
 )
 
-export const PreviousWordSchema = new Schema(
+const PreviousWordSchema = new Schema(
   {
     word: { type: String, minlength: 1, maxlength: 1, required: true },
     points: { type: Number, min: 1, required: true },

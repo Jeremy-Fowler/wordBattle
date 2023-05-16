@@ -1,15 +1,20 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
+import { friendshipsService } from '../services/FriendshipsService.js'
+import { gamePlayersService } from '../services/GamePlayersService.js'
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
-  constructor() {
+  constructor () {
     super('account')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
-      .put('', this.editAccount)
+      .get('/gameplayers', this.getGamePlayersByAccountId)
+      .get('/friendships', this.getFriendshipsByAccountId)
   }
+
+
 
   async getUserAccount(req, res, next) {
     try {
@@ -20,10 +25,19 @@ export class AccountController extends BaseController {
     }
   }
 
-  async editAccount(req, res, next) {
+  async getGamePlayersByAccountId(req, res, next) {
     try {
-      const account = await accountService.editAccount(req.userInfo.id, req.body)
-      res.send(account)
+      const games = await gamePlayersService.getGamePlayersByAccountId(req.userInfo.id)
+      return res.send(games)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getFriendshipsByAccountId(req, res, next) {
+    try {
+      const friendships = await friendshipsService.getFriendshipsByAccountId(req.userInfo.id)
+      return res.send(friendships)
     } catch (error) {
       next(error)
     }

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { AccountSchema } from '../models/Account'
-import { FriendSchema } from '../models/Friend.js';
+import { FriendshipSchema } from '../models/Friendship.js';
 import { GameSchema } from '../models/Game.js';
 import { GamePlayerSchema } from '../models/GamePlayer.js';
 import { MessageSchema } from '../models/Message.js';
@@ -12,7 +12,7 @@ class DbContext {
   Games = mongoose.model('Game', GameSchema);
   GamePlayers = mongoose.model('GamePlayer', GamePlayerSchema);
   Messages = mongoose.model('Message', MessageSchema)
-  Friends = mongoose.model('Friend', FriendSchema)
+  Friendships = mongoose.model('Friend', FriendshipSchema)
 }
 
 export const dbContext = new DbContext()
