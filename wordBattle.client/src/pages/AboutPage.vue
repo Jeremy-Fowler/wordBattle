@@ -1,24 +1,29 @@
 <template>
   <div class="about">
     <div class="letters">
-      <div class="letter" @click="selectLetter(letter)" v-for="letter in letters" :key="letter" :id="letter">{{ letter }}
+      <div class="letter" :class="{ 'letter-selected': selectedLetter === letter }" @click="selectLetter(letter)"
+        v-for="letter in letters" :key="letter" :id="letter">{{ letter }}
       </div>
     </div>
 
-    <div class="boxes">
-      <template v-for="(item, index) in boxItems" :key="`${item}-${index}`">
-        <div class="box" @click="selectBox(index)" v-if="item === '+'">+</div>
-        <div class="boxletter" v-else>{{ item }}</div>
-      </template>
+    <div class="boxitems">
+      <div
+        :class="{ 'boxletter-selected': selectedBoxItems.includes(index), 'small-box': item === '+', 'boxletter': item !== '+' }"
+        @click="selectBox(index)" v-for="(item, index) in boxItems" :key="`${item}-${index}`">
+        {{ item }}
+      </div>
     </div>
 
-    <button @click="reset">Reset</button>
-
-    <input type="text" v-model="newWordInput" placeholder="Enter new word">
-    <button @click="updateWord">Enter</button>
-    <button @click="saveWord">Save</button>
+    <div class="controls">
+      <button @click="reset">Reset</button>
+      <button @click="discardLetters">Discard</button>
+      <input type="text" v-model="newWordInput" placeholder="Enter new word">
+      <button @click="updateWord">Enter</button>
+      <button @click="saveWord">Save</button>
+    </div>
   </div>
 </template>
+
 
 <script>
 import { ref, reactive, computed } from 'vue';
@@ -34,13 +39,20 @@ export default {
     ]);
 
     const lastUpdatedBoxItems = ref([...boxItems]);
+    const selectedBoxItems = ref([]);
 
     function selectLetter(letter) {
       selectedLetter.value = letter;
     }
 
     function selectBox(index) {
-      if (selectedLetter.value && boxItems[index] === '+') {
+      if (boxItems[index] !== '+') {
+        if (selectedBoxItems.value.includes(index)) {
+          selectedBoxItems.value = selectedBoxItems.value.filter(i => i !== index);
+        } else {
+          selectedBoxItems.value.push(index);
+        }
+      } else if (selectedLetter.value && boxItems[index] === '+') {
         boxItems.splice(index, 1, selectedLetter.value);
         boxItems.splice(index + 1, 0, '+');
         boxItems.splice(index - 0, 0, '+');
@@ -53,6 +65,7 @@ export default {
       boxItems.splice(0, boxItems.length, ...lastUpdatedBoxItems.value);
       letters.splice(0, letters.length, ...['A', 'B', 'C', 'D', 'E', 'F', 'G']);
       selectedLetter.value = null;
+      selectedBoxItems.value = [];
     }
 
     function updateWord() {
@@ -81,6 +94,13 @@ export default {
       console.log(word);
     }
 
+    function discardLetters() {
+      selectedBoxItems.value.sort().reverse().forEach(index => {
+        boxItems.splice(index, 2);
+      });
+      selectedBoxItems.value = [];
+    }
+
     return {
       letters,
       selectedLetter,
@@ -91,6 +111,8 @@ export default {
       reset,
       updateWord,
       saveWord,
+      selectedBoxItems,
+      discardLetters
     };
   },
 };
@@ -107,49 +129,64 @@ export default {
 
 .letter {
   display: inline-block;
-  margin: 10px;
+  margin: 2px;
   width: 30px;
   height: 30px;
   border: 1px solid black;
   text-align: center;
+  color: aliceblue;
   line-height: 30px;
   cursor: pointer;
+}
+
+.letter-selected {
+  background-color: green;
 }
 
 
 .box {
   display: inline-block;
-  margin: 10px;
+  margin: 2px;
   width: 30px;
   height: 30px;
   border: 1px solid black;
   text-align: center;
+  color: aliceblue;
   line-height: 30px;
   cursor: pointer;
 }
 
 .boxletter {
   display: inline-block;
-  margin: 10px;
-  width: 30px;
-  height: 30px;
+  margin: 2px;
+  width: 25px;
+  height: 25px;
   border: 1px solid black;
   text-align: center;
-  line-height: 30px;
-
+  line-height: 25px;
+  color: aliceblue;
+  background-color: darkblue;
+  border-radius: 20%;
+  cursor: pointer;
 }
 
-.empty-box {
+.boxletter-selected {
+  background-color: green;
+}
+
+
+.small-box {
   display: inline-block;
   margin: 0px;
-  width: 5px;
-  height: 5px;
-  border: 1px solid black;
+  width: 15px;
+  height: 15px;
   text-align: center;
-  line-height: 30px;
+  line-height: 15px;
+  color: brown;
   cursor: pointer;
 }
 </style>
+
 
 
 
