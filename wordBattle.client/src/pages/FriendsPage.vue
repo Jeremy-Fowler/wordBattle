@@ -16,11 +16,11 @@
         </form>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 p-3" v-for="p in profiles">
-        <ProfileCard :profile="p" />
+    <!-- <div class="row">
+    <div class="col-12 p-3" v-for="p in profiles">
+    <ProfileCard :profile="p" />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
