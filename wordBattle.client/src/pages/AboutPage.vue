@@ -1,4 +1,28 @@
-<template></template>
+<template>
+  <div class="about">
+    <div class="letters">
+      <div class="letter" :class="{ 'letter-selected': selectedLetter === letter }" @click="selectLetter(letter)"
+        v-for="letter in letters" :key="letter" :id="letter">{{ letter }}
+      </div>
+    </div>
+
+    <div class="boxitems">
+      <div
+        :class="{ 'boxletter-selected': selectedBoxItems.includes(index), 'small-box': item === '+', 'boxletter': item !== '+' }"
+        @click="selectBox(index)" v-for="(item, index) in boxItems" :key="`${item}-${index}`">
+        {{ item }}
+      </div>
+    </div>
+
+    <div class="controls">
+      <button @click="reset">Reset</button>
+      <button @click="discardLetters">Discard</button>
+      <input type="text" v-model="newWordInput" placeholder="Enter new word">
+      <button @click="updateWord">Enter</button>
+      <button @click="saveWord">Save</button>
+    </div>
+  </div>
+</template>
 
 
 <script>
